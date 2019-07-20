@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--<title>Fighter Jet Ontology</title>-->
+
+    {% if title %}
+        <title>{{ title }} Search Engine</title>
+    {% else %}
+        <title>Ontology Search Engine</title>
+    {% endif %}
+</head>
+<body>
+<link rel="stylesheet" media="screen" href="static/bootstrap.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<div class="container">
+    {% if title %}
+        <h2>{{ title }} Search Engine</h2>
+    {% else %}
+        <h2>Ontology Search Engine</h2>
+    {% endif %}
+</div>
+<div class="container">
+    <form action="" method="post" role="form">
+        {{ form.csrf }}
+        <div class="form-group">
+            <label for="query"> Query:</label>
+            <input type="text" class="form-control" id="query" name="query" placeholder="Enter SAPRQL query here">
+
+        </div>
+        <button type="submit" class="btn btn-success">Sign Up</button>
+        <div>&nbsp;</div>
+    </form>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for message in messages %}
+    {% if "Error" not in message[1]: %}
+
+    <div class="alert alert-info">
+        <strong>Success! </strong> {{ message[1] }}
+    </div>
+    <div class="form">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+                <th scope="col">#</th>
+                {% for col in output.columns %}
+                    <th scope="col">{{ col }}</th>
+                {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for dat in output.data %}
+                <tr>
+                    <th scope="row">{{ loop.index}}</th>
+                    {% for data in dat %}
+                        <td>{{ data }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </div>
+    {% block table %}{% endblock %}
+    {% endif %}
+    {% if "Error" in message[1]: %}
+    <div class="alert alert-warning">
+        {{ message[1] }}
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+</div>
+</body>
+</html>
