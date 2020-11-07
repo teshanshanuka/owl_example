@@ -2,34 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!--<title>Fighter Jet Ontology</title>-->
 
-    {% if title %}
-        <title>{{ title }} Search Engine</title>
-    {% else %}
-        <title>Ontology Search Engine</title>
-    {% endif %}
 </head>
 <body>
 <link rel="stylesheet" media="screen" href="static/bootstrap.min.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
 <div class="container">
     {% if title %}
-        <h2>{{ title }} Search Engine</h2>
+        <h1 style="text-align: center;">{{ title }}</h1>
     {% else %}
-        <h2>Ontology Search Engine</h2>
+        <h1 style="text-align: center;">Vehicle Search</h1>
     {% endif %}
 </div>
 <div class="container">
     <form action="" method="post" role="form">
         {{ form.csrf }}
+
         <div class="form-group">
-            <label for="query"> Query:</label>
-            <input type="text" class="form-control" id="query" name="query" placeholder="Enter SAPRQL query here">
+            <div>
+                <label> Vehicles by Category: </label>
+            </div>
+            
+            <button type="submit" class="btn btn-success" name="but1" value = "cars">Cars</button>
+            <button type="submit" class="btn btn-success" name="but1" value = "hybrid">Hybrid & Fuel Cell</button>
+            <button type="submit" class="btn btn-success" name="but1" value = "crossovers">Crossovers</button>
+            <button type="submit" class="btn btn-success" name="but1" value = "suvs">SUVs</button>
+            <button type="submit" class="btn btn-success" name="but1" value = "trucks">Pick-Up</button>
+            <button type="submit" class="btn btn-success" name="but1" value = "minivans">Minivans</button>
+            <button type="submit" class="btn btn-success" name="but1" value = "all">All Vehicle</button>
+        </div>
+
+        <div class="form-group">
+            <div>
+                <label> Engines: </label>
+            </div>
+            
+            <button type="submit" class="btn btn-success" name="but1" value = "four">4 Cylinder</button>
+            <button type="submit" class="btn btn-success" name="but1" value = "six">6 Cylinder</button>
+            <button type="submit" class="btn btn-success" name="but1" value = "eight">8 Cylinder</button>
 
         </div>
-        <button type="submit" class="btn btn-success">Sign Up</button>
+        
+
+        <div class="form-group">
+            <label for="query"> Max Price:</label>
+            <input type="text" class="form-control" id="query" name="query" placeholder="Enter the max price">
+        </div>
+
+        <button type="submit" class="btn btn-success" name="but1" value = "else">Search</button>
         <div>&nbsp;</div>
     </form>
     {% with messages = get_flashed_messages(with_categories=true) %}
