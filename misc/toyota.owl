@@ -1,0 +1,1229 @@
+@prefix : <http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles> .
+
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles> rdf:type owl:Ontology ;
+                                                                       rdfs:comment "This ontology is about Toyota car manufacturers vehicle models." .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#ElectricMotor
+:ElectricMotor rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Engine
+:Engine rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#PowerProfile
+:PowerProfile rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#SpeedProfile
+:SpeedProfile rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#hasEngine
+:hasEngine rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :Engine ;
+           owl:inverseOf :isEngineOf ;
+           rdf:type owl:TransitiveProperty ;
+           rdfs:domain :Vehicles ;
+           rdfs:range :Engines .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#hasMotor
+:hasMotor rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :ElectricMotor ;
+          owl:inverseOf :isMotorOf ;
+          rdf:type owl:TransitiveProperty ;
+          rdfs:domain :Vehicles ;
+          rdfs:range :Motor .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#hasPowerProfile
+:hasPowerProfile rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :PowerProfile ;
+                 rdf:type owl:FunctionalProperty ;
+                 rdfs:domain :Vehicles ;
+                 rdfs:range :PowerProfilePartition .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#hasSpeedProfile
+:hasSpeedProfile rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :SpeedProfile ;
+                 rdf:type owl:FunctionalProperty ;
+                 rdfs:domain :Vehicles ;
+                 rdfs:range :SpeedProfilePartition .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#isEngineOf
+:isEngineOf rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf :Engine ;
+            rdfs:domain :Engines ;
+            rdfs:range :Vehicles .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#isMotorOf
+:isMotorOf rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf :ElectricMotor ;
+           rdfs:domain :Motor ;
+           rdfs:range :Vehicles .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#hasCargoSpace
+:hasCargoSpace rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#hasCombinedMPGValue
+:hasCombinedMPGValue rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#hasEngineCapacityValue
+:hasEngineCapacityValue rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#hasEngineHorsePowerValue
+:hasEngineHorsePowerValue rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#hasHightValue
+:hasHightValue rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#hasManufacturedYear
+:hasManufacturedYear rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#hasMaxSpeed
+:hasMaxSpeed rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#hasPriceValue
+:hasPriceValue rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#hasSeatingValue
+:hasSeatingValue rdf:type owl:DatatypeProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Cars
+:Cars rdf:type owl:Class ;
+      owl:equivalentClass [ owl:intersectionOf ( :VehicleTypes
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty :hasSeatingValue ;
+                                                   owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                        owl:onDatatype xsd:integer ;
+                                                                        owl:withRestrictions ( [ xsd:minInclusive 4
+                                                                                               ]
+                                                                                             )
+                                                                      ]
+                                                 ]
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty :hasHightValue ;
+                                                   owl:allValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                       owl:onDatatype xsd:integer ;
+                                                                       owl:withRestrictions ( [ xsd:maxExclusive 61
+                                                                                              ]
+                                                                                            )
+                                                                     ]
+                                                 ]
+                                               ) ;
+                            rdf:type owl:Class
+                          ] ;
+      rdfs:comment "A car (or automobile) is a wheeled motor vehicle used for transportation." .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Cheap
+:Cheap rdf:type owl:Class ;
+       owl:equivalentClass [ owl:intersectionOf ( :Vehicles
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :hasPriceValue ;
+                                                    owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                         owl:onDatatype xsd:integer ;
+                                                                         owl:withRestrictions ( [ xsd:maxExclusive 25000
+                                                                                                ]
+                                                                                              )
+                                                                       ]
+                                                  ]
+                                                ) ;
+                             rdf:type owl:Class
+                           ] .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Crossovers
+:Crossovers rdf:type owl:Class ;
+            owl:equivalentClass [ owl:intersectionOf ( :VehicleTypes
+                                                       [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                owl:onProperty :hasHightValue ;
+                                                                                owl:allValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                                    owl:onDatatype xsd:integer ;
+                                                                                                    owl:withRestrictions ( [ xsd:minInclusive 61
+                                                                                                                           ]
+                                                                                                                         )
+                                                                                                  ]
+                                                                              ]
+                                                                              [ rdf:type owl:Restriction ;
+                                                                                owl:onProperty :hasHightValue ;
+                                                                                owl:allValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                                    owl:onDatatype xsd:integer ;
+                                                                                                    owl:withRestrictions ( [ xsd:maxExclusive 68
+                                                                                                                           ]
+                                                                                                                         )
+                                                                                                  ]
+                                                                              ]
+                                                                            ) ;
+                                                         rdf:type owl:Class
+                                                       ]
+                                                       [ rdf:type owl:Restriction ;
+                                                         owl:onProperty :hasSeatingValue ;
+                                                         owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                              owl:onDatatype xsd:integer ;
+                                                                              owl:withRestrictions ( [ xsd:minInclusive 5
+                                                                                                     ]
+                                                                                                   )
+                                                                            ]
+                                                       ]
+                                                     ) ;
+                                  rdf:type owl:Class
+                                ] ;
+            rdfs:comment "A crossover SUV – also called a crossover utility vehicle – is a type of sport utility vehicle of unibody construction. Crossovers are often based on a platform shared with a passenger car" .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#EcoFriendly
+:EcoFriendly rdf:type owl:Class ;
+             owl:equivalentClass [ owl:intersectionOf ( :Vehicles
+                                                        [ rdf:type owl:Restriction ;
+                                                          owl:onProperty :hasCombinedMPGValue ;
+                                                          owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                               owl:onDatatype xsd:integer ;
+                                                                               owl:withRestrictions ( [ xsd:minExclusive 25
+                                                                                                      ]
+                                                                                                    )
+                                                                             ]
+                                                        ]
+                                                      ) ;
+                                   rdf:type owl:Class
+                                 ] .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Engines
+:Engines rdf:type owl:Class ;
+         owl:equivalentClass [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                      owl:onProperty :hasPowerProfile ;
+                                                      owl:someValuesFrom :PowerProfilePartition
+                                                    ]
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty :hasEngineCapacityValue ;
+                                                      owl:someValuesFrom xsd:integer
+                                                    ]
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty :hasEngineHorsePowerValue ;
+                                                      owl:someValuesFrom xsd:integer
+                                                    ]
+                                                  ) ;
+                               rdf:type owl:Class
+                             ] .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Expensive
+:Expensive rdf:type owl:Class ;
+           owl:equivalentClass [ owl:intersectionOf ( :Vehicles
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty :hasPriceValue ;
+                                                        owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                             owl:onDatatype xsd:integer ;
+                                                                             owl:withRestrictions ( [ xsd:minInclusive 45000
+                                                                                                    ]
+                                                                                                  )
+                                                                           ]
+                                                      ]
+                                                    ) ;
+                                 rdf:type owl:Class
+                               ] .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Family
+:Family rdf:type owl:Class ;
+        owl:equivalentClass [ owl:intersectionOf ( :Vehicles
+                                                   [ rdf:type owl:Restriction ;
+                                                     owl:onProperty :hasSeatingValue ;
+                                                     owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                          owl:onDatatype xsd:integer ;
+                                                                          owl:withRestrictions ( [ xsd:minInclusive 5
+                                                                                                 ]
+                                                                                               )
+                                                                        ]
+                                                   ]
+                                                 ) ;
+                              rdf:type owl:Class
+                            ] .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#HighPower
+:HighPower rdf:type owl:Class ;
+           rdfs:subClassOf :PowerProfilePartition .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#HighSpeed
+:HighSpeed rdf:type owl:Class ;
+           rdfs:subClassOf :SpeedProfilePartition .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#HybridAndFuelCells
+:HybridAndFuelCells rdf:type owl:Class ;
+                    owl:equivalentClass [ owl:intersectionOf ( :VehicleTypes
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty :hasMotor ;
+                                                                 owl:someValuesFrom :Motor
+                                                               ]
+                                                             ) ;
+                                          rdf:type owl:Class
+                                        ] ;
+                    rdfs:comment "A hybrid vehicle uses two or more distinct types of power, such as submarines that use diesel when surfaced and batteries when submerged" .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#LowPower
+:LowPower rdf:type owl:Class ;
+          rdfs:subClassOf :PowerProfilePartition .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#LowSpeed
+:LowSpeed rdf:type owl:Class ;
+          rdfs:subClassOf :SpeedProfilePartition .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#MediumPower
+:MediumPower rdf:type owl:Class ;
+             rdfs:subClassOf :PowerProfilePartition .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#MediumSpeed
+:MediumSpeed rdf:type owl:Class ;
+             rdfs:subClassOf :SpeedProfilePartition .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Minivan
+:Minivan rdf:type owl:Class ;
+         owl:equivalentClass [ owl:intersectionOf ( :VehicleTypes
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty :hasSeatingValue ;
+                                                      owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                           owl:onDatatype xsd:integer ;
+                                                                           owl:withRestrictions ( [ xsd:minExclusive 7
+                                                                                                  ]
+                                                                                                )
+                                                                         ]
+                                                    ]
+                                                  ) ;
+                               rdf:type owl:Class
+                             ] ;
+         rdfs:comment "Vehicles designed to transport passengers in the rear seating row(s)" .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Motor
+:Motor rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#PowerProfilePartition
+:PowerProfilePartition rdf:type owl:Class ;
+                       owl:equivalentClass [ rdf:type owl:Class ;
+                                             owl:unionOf ( :HighPower
+                                                           :LowPower
+                                                           :MediumPower
+                                                         )
+                                           ] ;
+                       rdfs:subClassOf :ValuePartitions .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Racing
+:Racing rdf:type owl:Class ;
+        owl:equivalentClass [ owl:intersectionOf ( :Vehicles
+                                                   [ rdf:type owl:Restriction ;
+                                                     owl:onProperty :hasSeatingValue ;
+                                                     owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                          owl:onDatatype xsd:integer ;
+                                                                          owl:withRestrictions ( [ xsd:maxExclusive 5
+                                                                                                 ]
+                                                                                               )
+                                                                        ]
+                                                   ]
+                                                 ) ;
+                              rdf:type owl:Class
+                            ] ,
+                            [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                     owl:onProperty :hasPowerProfile ;
+                                                     owl:someValuesFrom :HighPower
+                                                   ]
+                                                   [ rdf:type owl:Restriction ;
+                                                     owl:onProperty :hasSpeedProfile ;
+                                                     owl:someValuesFrom :HighSpeed
+                                                   ]
+                                                 ) ;
+                              rdf:type owl:Class
+                            ] .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#SUVs
+:SUVs rdf:type owl:Class ;
+      owl:equivalentClass [ owl:intersectionOf ( :VehicleTypes
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty :hasSeatingValue ;
+                                                   owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                        owl:onDatatype xsd:integer ;
+                                                                        owl:withRestrictions ( [ xsd:minInclusive 5
+                                                                                               ]
+                                                                                             )
+                                                                      ]
+                                                 ]
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty :hasHightValue ;
+                                                   owl:allValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                       owl:onDatatype xsd:integer ;
+                                                                       owl:withRestrictions ( [ xsd:minExclusive 68
+                                                                                              ]
+                                                                                            )
+                                                                     ]
+                                                 ]
+                                               ) ;
+                            rdf:type owl:Class
+                          ] ;
+      rdfs:comment "Car classification that combines elements of road-going passenger cars with features from off-road vehicles" .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#SpeedProfilePartition
+:SpeedProfilePartition rdf:type owl:Class ;
+                       owl:equivalentClass [ rdf:type owl:Class ;
+                                             owl:unionOf ( :HighSpeed
+                                                           :LowSpeed
+                                                           :MediumSpeed
+                                                         )
+                                           ] ;
+                       rdfs:subClassOf :ValuePartitions .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Trucks
+:Trucks rdf:type owl:Class ;
+        owl:equivalentClass [ owl:intersectionOf ( :VehicleTypes
+                                                   [ rdf:type owl:Restriction ;
+                                                     owl:onProperty :hasCargoSpace ;
+                                                     owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                          owl:onDatatype xsd:integer ;
+                                                                          owl:withRestrictions ( [ xsd:minExclusive 26
+                                                                                                 ]
+                                                                                               )
+                                                                        ]
+                                                   ]
+                                                 ) ;
+                              rdf:type owl:Class
+                            ] ;
+        rdfs:comment "Motor vehicle designed to transport cargo with open cargo area" .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Utility
+:Utility rdf:type owl:Class ;
+         owl:equivalentClass [ owl:intersectionOf ( :Vehicles
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty :hasCargoSpace ;
+                                                      owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                           owl:onDatatype xsd:integer ;
+                                                                           owl:withRestrictions ( [ xsd:minExclusive 20
+                                                                                                  ]
+                                                                                                )
+                                                                         ]
+                                                    ]
+                                                  ) ;
+                               rdf:type owl:Class
+                             ] .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#ValuePartitions
+:ValuePartitions rdf:type owl:Class .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#VehicleTypes
+:VehicleTypes rdf:type owl:Class ;
+              rdfs:subClassOf :Vehicles ;
+              rdfs:comment "Types of vehicles under Toyota brand name in USA" .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Vehicles
+:Vehicles rdf:type owl:Class ;
+          rdfs:subClassOf [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasEngine ;
+                            owl:someValuesFrom :Engines
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasSpeedProfile ;
+                            owl:someValuesFrom :SpeedProfilePartition
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasCombinedMPGValue ;
+                            owl:someValuesFrom xsd:integer
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasHightValue ;
+                            owl:someValuesFrom xsd:integer
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasManufacturedYear ;
+                            owl:someValuesFrom xsd:integer
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasMaxSpeed ;
+                            owl:someValuesFrom xsd:integer
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasPriceValue ;
+                            owl:someValuesFrom xsd:integer
+                          ] ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :hasSeatingValue ;
+                            owl:someValuesFrom xsd:integer
+                          ] .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#3Cylinder
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#3Cylinder> rdf:type owl:Class ;
+                                                                                rdfs:subClassOf :Engines .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#4Cylinder
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#4Cylinder> rdf:type owl:Class ;
+                                                                                rdfs:subClassOf :Engines .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#6Cylinder
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#6Cylinder> rdf:type owl:Class ;
+                                                                                rdfs:subClassOf :Engines .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#8Cylinder
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#8Cylinder> rdf:type owl:Class ;
+                                                                                rdfs:subClassOf :Engines .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#C-HR_2020
+:C-HR_2020 rdf:type owl:NamedIndividual ,
+                    :Crossovers ;
+           :hasEngine :DOHC_4_2L ;
+           :hasCargoSpace 10 ;
+           :hasCombinedMPGValue 31 ;
+           :hasHightValue 62 ;
+           :hasManufacturedYear 2020 ;
+           :hasMaxSpeed 150 ;
+           :hasPriceValue 21295 ;
+           :hasSeatingValue 5 .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#C-HR_2021
+:C-HR_2021 rdf:type owl:NamedIndividual ,
+                    :Crossovers ;
+           :hasEngine :DOHC_4_2L ;
+           :hasCargoSpace 10 ;
+           :hasCombinedMPGValue 31 ;
+           :hasHightValue 62 ;
+           :hasManufacturedYear 2021 ;
+           :hasMaxSpeed 150 ;
+           :hasPriceValue 21500 ;
+           :hasSeatingValue 5 .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#DOHC_4_25L
+:DOHC_4_25L rdf:type owl:NamedIndividual ,
+                     <http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#4Cylinder> ;
+            :hasEngineCapacityValue 2500 ;
+            :hasEngineHorsePowerValue 243 .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#DOHC_4_27L
+:DOHC_4_27L rdf:type owl:NamedIndividual ,
+                     <http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#4Cylinder> ;
+            :hasEngineCapacityValue 2700 ;
+            :hasEngineHorsePowerValue 159 .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#DOHC_4_15L
+:DOHC_4_15L rdf:type owl:NamedIndividual ,
+                    <http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#4Cylinder> ;
+           :hasEngineCapacityValue 1500 ;
+           :hasEngineHorsePowerValue 106 .
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#DOHC_4_2L
+:DOHC_4_2L rdf:type owl:NamedIndividual ,
+                    <http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#4Cylinder> ;
+           :hasEngineCapacityValue 2000 ;
+           :hasEngineHorsePowerValue 144 .
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#DOHC_4_18L
+:DOHC_4_18L rdf:type owl:NamedIndividual ,
+                    <http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#4Cylinder> ;
+           :hasEngineCapacityValue 1800 ;
+           :hasEngineHorsePowerValue 139 .
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#DOHC_V6_3L
+:DOHC_V6_3L rdf:type owl:NamedIndividual ,
+                      <http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#6Cylinder> ;
+             :hasEngineCapacityValue 3000 ;
+             :hasEngineHorsePowerValue 335 .
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#DOHC_V6_35L
+:DOHC_V6_35L rdf:type owl:NamedIndividual ,
+                      <http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#6Cylinder> ;
+             :hasEngineCapacityValue 3500 ;
+             :hasEngineHorsePowerValue 295 .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#DOHC_V6_4L
+:DOHC_V6_4L rdf:type owl:NamedIndividual ,
+                     <http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#6Cylinder> ;
+            :hasEngineCapacityValue 4000 ;
+            :hasEngineHorsePowerValue 270 .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#DOHC_V8_57L
+:DOHC_V8_57L rdf:type owl:NamedIndividual ,
+                      <http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#8Cylinder> ;
+             :hasEngineCapacityValue 5700 ;
+             :hasEngineHorsePowerValue 381 .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Highlander_Hybrid_2020
+:Highlander_Hybrid_2020 rdf:type owl:NamedIndividual ,
+                                 :HybridAndFuelCells ;
+                        :hasEngine :DOHC_4_25L ;
+                        :hasMotor :HybridMotor ;
+                        :hasCargoSpace 12 ;
+                        :hasCombinedMPGValue 36 ;
+                        :hasHightValue 69 ;
+                        :hasManufacturedYear 2020 ;
+                        :hasMaxSpeed 120 ;
+                        :hasPriceValue 38200 ;
+                        :hasSeatingValue 7 .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Highlander_Hybrid_2021
+:Highlander_Hybrid_2021 rdf:type owl:NamedIndividual ,
+                                 :HybridAndFuelCells ;
+                        :hasEngine :DOHC_4_25L ;
+                        :hasMotor :HybridMotor ;
+                        :hasCargoSpace 12 ;
+                        :hasCombinedMPGValue 36 ;
+                        :hasHightValue 69 ;
+                        :hasManufacturedYear 2021 ;
+                        :hasMaxSpeed 120 ;
+                        :hasPriceValue 38700 ;
+                        :hasSeatingValue 7 .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Highlander_XLE_2020
+:Highlander_XLE_2020 rdf:type owl:NamedIndividual ,
+                              :SUVs ;
+                     :hasEngine :DOHC_V6_35L ;
+                     :hasCargoSpace 12 ;
+                     :hasCombinedMPGValue 27 ;
+                     :hasHightValue 69 ;
+                     :hasManufacturedYear 2020 ;
+                     :hasMaxSpeed 120 ;
+                     :hasPriceValue 36300 ;
+                     :hasSeatingValue 7 .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Highlander_XLE_2021
+:Highlander_XLE_2021 rdf:type owl:NamedIndividual ,
+                              :SUVs ;
+                     :hasEngine :DOHC_V6_35L ;
+                     :hasCargoSpace 12 ;
+                     :hasCombinedMPGValue 27 ;
+                     :hasHightValue 69 ;
+                     :hasManufacturedYear 2021 ;
+                     :hasMaxSpeed 120 ;
+                     :hasPriceValue 36600 ;
+                     :hasSeatingValue 7 .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#HybridMotor
+:HybridMotor rdf:type owl:NamedIndividual ,
+                      :Motor .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Land_Cruiser_2020
+:Land_Cruiser_2020 rdf:type owl:NamedIndividual ,
+                            :SUVs ;
+                   :hasEngine :DOHC_V8_57L ;
+                   :hasCargoSpace 20 ;
+                   :hasCombinedMPGValue 17 ;
+                   :hasHightValue 74 ;
+                   :hasManufacturedYear 2020 ;
+                   :hasMaxSpeed 120 ;
+                   :hasPriceValue 85600 ;
+                   :hasSeatingValue 7 .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Land_Cruiser_2021
+:Land_Cruiser_2021 rdf:type owl:NamedIndividual ,
+                            :SUVs ;
+                   :hasEngine :DOHC_V8_57L ;
+                   :hasCargoSpace 20 ;
+                   :hasCombinedMPGValue 17 ;
+                   :hasHightValue 74 ;
+                   :hasManufacturedYear 2021 ;
+                   :hasMaxSpeed 120 ;
+                   :hasPriceValue 86000 ;
+                   :hasSeatingValue 7 .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#PluginHybridMotor
+:PluginHybridMotor rdf:type owl:NamedIndividual ,
+                            :Motor .
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#FuelCellMotor
+:FuelCellMotor rdf:type owl:NamedIndividual ,
+                            :Motor .
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#RAV4_2020
+:RAV4_2020 rdf:type owl:NamedIndividual ,
+                    :Crossovers ;
+           :hasEngine :DOHC_4_25L ;
+           :hasCargoSpace 11 ;
+           :hasCombinedMPGValue 27 ;
+           :hasHightValue 67 ;
+           :hasManufacturedYear 2020 ;
+           :hasMaxSpeed 140 ;
+           :hasPriceValue 25950 ;
+           :hasSeatingValue 5 .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#RAV4_2021
+:RAV4_2021 rdf:type owl:NamedIndividual ,
+                    :Crossovers ;
+           :hasEngine :DOHC_4_25L ;
+           :hasCargoSpace 11 ;
+           :hasCombinedMPGValue 27 ;
+           :hasHightValue 67 ;
+           :hasManufacturedYear 2021 ;
+           :hasMaxSpeed 140 ;
+           :hasPriceValue 27150 ;
+           :hasSeatingValue 5 .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#RAV4_Hybrid_2020
+:RAV4_Hybrid_2020 rdf:type owl:NamedIndividual ,
+                           :HybridAndFuelCells ;
+                  :hasEngine :DOHC_4_2L ;
+                  :hasMotor :HybridMotor ;
+                  :hasCargoSpace 11 ;
+                  :hasCombinedMPGValue 35 ;
+                  :hasHightValue 67 ;
+                  :hasManufacturedYear 2020 ;
+                  :hasMaxSpeed 140 ;
+                  :hasPriceValue 27950 ;
+                  :hasSeatingValue 5 .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#RAV4_Hybrid_2021
+:RAV4_Hybrid_2021 rdf:type owl:NamedIndividual ,
+                           :HybridAndFuelCells ;
+                  :hasEngine :DOHC_4_2L ;
+                  :hasMotor :HybridMotor ;
+                  :hasCargoSpace 11 ;
+                  :hasCombinedMPGValue 35 ;
+                  :hasHightValue 67 ;
+                  :hasManufacturedYear 2021 ;
+                  :hasMaxSpeed 140 ;
+                  :hasPriceValue 28150 ;
+                  :hasSeatingValue 5 .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#RAV4_Prime_2021
+:RAV4_Prime_2021 rdf:type owl:NamedIndividual ,
+                          :HybridAndFuelCells ;
+                 :hasEngine :DOHC_4_2L ;
+                 :hasMotor :PluginHybridMotor ;
+                 :hasCargoSpace 11 ;
+                 :hasCombinedMPGValue 40 ;
+                 :hasHightValue 67 ;
+                 :hasManufacturedYear 2021 ;
+                 :hasMaxSpeed 140 ;
+                 :hasPriceValue 38100 ;
+                 :hasSeatingValue 5 .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Sequoia_2020
+:Sequoia_2020 rdf:type owl:NamedIndividual ,
+                       :SUVs ;
+              :hasEngine :DOHC_V8_57L ;
+              :hasCargoSpace 20 ;
+              :hasCombinedMPGValue 15 ;
+              :hasHightValue 77 ;
+              :hasManufacturedYear 2020 ;
+              :hasMaxSpeed 110 ;
+              :hasPriceValue 46600 ;
+              :hasSeatingValue 7 .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Sienna_2020
+:Sienna_2020 rdf:type owl:NamedIndividual ,
+                      :Minivan ;
+             :hasEngine :DOHC_V6_35L ;
+             :hasCargoSpace 20 ;
+             :hasCombinedMPGValue 24 ;
+             :hasHightValue 71 ;
+             :hasManufacturedYear 2020 ;
+             :hasMaxSpeed 120 ;
+             :hasPriceValue 31600 ;
+             :hasSeatingValue 8 .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Sienna_Hybrid_2020
+:Sienna_Hybrid_2020 rdf:type owl:NamedIndividual ,
+                             :HybridAndFuelCells ;
+                    :hasEngine :DOHC_4_25L ;
+                    :hasMotor :HybridMotor ;
+                    :hasCargoSpace 20 ;
+                    :hasCombinedMPGValue 36 ;
+                    :hasHightValue 71 ;
+                    :hasManufacturedYear 2020 ;
+                    :hasMaxSpeed 120 ;
+                    :hasPriceValue 34500 ;
+                    :hasSeatingValue 8 .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Tacoma_2020
+:Tacoma_2020 rdf:type owl:NamedIndividual ,
+                      :Trucks ;
+             :hasEngine :DOHC_4_27L ;
+             :hasCargoSpace 28 ;
+             :hasCombinedMPGValue 22 ;
+             :hasHightValue 73 ;
+             :hasManufacturedYear 2020 ;
+             :hasMaxSpeed 100 ;
+             :hasPriceValue 26050 ;
+             :hasSeatingValue 5 .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Tacoma_2021
+:Tacoma_2021 rdf:type owl:NamedIndividual ,
+                      :Trucks ;
+             :hasEngine :DOHC_4_27L ;
+             :hasCargoSpace 28 ;
+             :hasCombinedMPGValue 22 ;
+             :hasHightValue 73 ;
+             :hasManufacturedYear 2021 ;
+             :hasMaxSpeed 100 ;
+             :hasPriceValue 27150 ;
+             :hasSeatingValue 5 .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Tundra_2020
+:Tundra_2020 rdf:type owl:NamedIndividual ,
+                      :Trucks ;
+             :hasEngine :DOHC_V8_57L ;
+             :hasCargoSpace 28 ;
+             :hasCombinedMPGValue 18 ;
+             :hasHightValue 75 ;
+             :hasManufacturedYear 2020 ;
+             :hasMaxSpeed 100 ;
+             :hasPriceValue 33575 ;
+             :hasSeatingValue 5 .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Tundra_2021
+:Tundra_2021 rdf:type owl:NamedIndividual ,
+                      :Trucks ;
+             :hasEngine :DOHC_V8_57L ;
+             :hasCargoSpace 28 ;
+             :hasCombinedMPGValue 18 ;
+             :hasHightValue 75 ;
+             :hasManufacturedYear 2021 ;
+             :hasMaxSpeed 100 ;
+             :hasPriceValue 34575 ;
+             :hasSeatingValue 5 .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Venza_2021
+:Venza_2021 rdf:type owl:NamedIndividual ,
+                     :HybridAndFuelCells ;
+            :hasEngine :DOHC_4_2L ;
+            :hasMotor :HybridMotor ;
+            :hasCargoSpace 10 ;
+            :hasCombinedMPGValue 35 ;
+            :hasHightValue 65 ;
+            :hasManufacturedYear 2021 ;
+            :hasMaxSpeed 160 ;
+            :hasPriceValue 32470 ;
+            :hasSeatingValue 5 .
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Mirai_2020
+:Mirai_2020 rdf:type owl:NamedIndividual ,
+                     :HybridAndFuelCells ;
+            :hasMotor :FuelCellMotor ;
+            :hasCargoSpace 7 ;
+            :hasCombinedMPGValue 65 ;
+            :hasHightValue 52 ;
+            :hasManufacturedYear 2020 ;
+            :hasMaxSpeed 100 ;
+            :hasPriceValue 58550 ;
+            :hasSeatingValue 5 .
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Yaris_2020
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Yaris_2020> rdf:type owl:NamedIndividual ,
+                                                                                       :Cars ;
+                                                                                   :hasEngine :DOHC_4_15L ;
+                                                                                   :hasCargoSpace 6 ;
+                                                                                   :hasCombinedMPGValue 31 ;
+                                                                                   :hasHightValue 52 ;
+                                                                                   :hasManufacturedYear 2020 ;
+                                                                                   :hasMaxSpeed 140 ;
+                                                                                   :hasPriceValue 15600 ;
+                                                                                   :hasSeatingValue 5 .
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Yaris_Hatchback_2020
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Yaris_Hatchback_2020> rdf:type owl:NamedIndividual ,
+                                                                                       :Cars ;
+                                                                                   :hasEngine :DOHC_4_15L ;
+                                                                                   :hasCargoSpace 6 ;
+                                                                                   :hasCombinedMPGValue 31 ;
+                                                                                   :hasHightValue 52 ;
+                                                                                   :hasManufacturedYear 2020 ;
+                                                                                   :hasMaxSpeed 140 ;
+                                                                                   :hasPriceValue 14600 ;
+                                                                                   :hasSeatingValue 5 .
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Prius_2020
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Prius_2020> rdf:type owl:NamedIndividual ,
+                                                                                       :HybridAndFuelCells ;
+                                                                                   :hasEngine :DOHC_4_18L ;
+                                                                                   :hasMotor :HybridMotor ;
+                                                                                   :hasCargoSpace 6 ;
+                                                                                   :hasCombinedMPGValue 51 ;
+                                                                                   :hasHightValue 52 ;
+                                                                                   :hasManufacturedYear 2020 ;
+                                                                                   :hasMaxSpeed 140 ;
+                                                                                   :hasPriceValue 23500 ;
+                                                                                   :hasSeatingValue 5 .
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Prius_2021
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Prius_2021> rdf:type owl:NamedIndividual ,
+                                                                                       :HybridAndFuelCells ;
+                                                                                   :hasEngine :DOHC_4_18L ;
+                                                                                   :hasMotor :HybridMotor ;
+                                                                                   :hasCargoSpace 6 ;
+                                                                                   :hasCombinedMPGValue 51 ;
+                                                                                   :hasHightValue 52 ;
+                                                                                   :hasManufacturedYear 2021 ;
+                                                                                   :hasMaxSpeed 140 ;
+                                                                                   :hasPriceValue 23500 ;
+                                                                                   :hasSeatingValue 5 .
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Prius_Prime_2020
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Prius_Prime_2020> rdf:type owl:NamedIndividual ,
+                                                                                       :HybridAndFuelCells ;
+                                                                                   :hasEngine :DOHC_4_18L ;
+                                                                                   :hasMotor :PluginHybridMotor ;
+                                                                                   :hasCargoSpace 6 ;
+                                                                                   :hasCombinedMPGValue 51 ;
+                                                                                   :hasHightValue 52 ;
+                                                                                   :hasManufacturedYear 2020 ;
+                                                                                   :hasMaxSpeed 140 ;
+                                                                                   :hasPriceValue 27500 ;
+                                                                                   :hasSeatingValue 5 .
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Prius_Prime_2021
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Prius_Prime_2021> rdf:type owl:NamedIndividual ,
+                                                                                       :HybridAndFuelCells ;
+                                                                                   :hasEngine :DOHC_4_18L ;
+                                                                                   :hasMotor :PluginHybridMotor ;
+                                                                                   :hasCargoSpace 6 ;
+                                                                                   :hasCombinedMPGValue 51 ;
+                                                                                   :hasHightValue 52 ;
+                                                                                   :hasManufacturedYear 2021 ;
+                                                                                   :hasMaxSpeed 140 ;
+                                                                                   :hasPriceValue 28500 ;
+                                                                                   :hasSeatingValue 5 .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#4Runner_2020
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#4Runner_2020> rdf:type owl:NamedIndividual ,
+                                                                                            :SUVs ;
+                                                                                   :hasEngine :DOHC_V6_4L ;
+                                                                                   :hasCargoSpace 15 ;
+                                                                                   :hasCombinedMPGValue 19 ;
+                                                                                   :hasHightValue 72 ;
+                                                                                   :hasManufacturedYear 2020 ;
+                                                                                   :hasMaxSpeed 100 ;
+                                                                                   :hasPriceValue 41190 ;
+                                                                                   :hasSeatingValue 7 .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#4Runner_2021
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#4Runner_2021> rdf:type owl:NamedIndividual ,
+                                                                                            :SUVs ;
+                                                                                   :hasEngine :DOHC_V6_4L ;
+                                                                                   :hasCargoSpace 15 ;
+                                                                                   :hasCombinedMPGValue 19 ;
+                                                                                   :hasHightValue 72 ;
+                                                                                   :hasManufacturedYear 2021 ;
+                                                                                   :hasMaxSpeed 100 ;
+                                                                                   :hasPriceValue 44385 ;
+                                                                                   :hasSeatingValue 7 .
+
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#86_2020
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#86_2020> rdf:type owl:NamedIndividual ,
+                                                                                       :Cars ;
+                                                                                   :hasEngine :DOHC_4_2L ;
+                                                                                   :hasCargoSpace 5 ;
+                                                                                   :hasCombinedMPGValue 28 ;
+                                                                                   :hasHightValue 52 ;
+                                                                                   :hasManufacturedYear 2020 ;
+                                                                                   :hasMaxSpeed 170 ;
+                                                                                   :hasPriceValue 27200 ;
+                                                                                   :hasSeatingValue 4 .
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#GR_Supra_2020
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#GR_Supra_2020> rdf:type owl:NamedIndividual ,
+                                                                                       :Cars ;
+                                                                                   :hasEngine :DOHC_V6_3L ;
+                                                                                   :hasCargoSpace 5 ;
+                                                                                   :hasCombinedMPGValue 24 ;
+                                                                                   :hasHightValue 51 ;
+                                                                                   :hasManufacturedYear 2020 ;
+                                                                                   :hasMaxSpeed 180 ;
+                                                                                   :hasPriceValue 49900 ;
+                                                                                   :hasSeatingValue 4 .
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#GR_Supra_2021
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#GR_Supra_2021> rdf:type owl:NamedIndividual ,
+                                                                                       :Cars ;
+                                                                                   :hasEngine :DOHC_V6_3L ;
+                                                                                   :hasCargoSpace 5 ;
+                                                                                   :hasCombinedMPGValue 24 ;
+                                                                                   :hasHightValue 51 ;
+                                                                                   :hasManufacturedYear 2021 ;
+                                                                                   :hasMaxSpeed 180 ;
+                                                                                   :hasPriceValue 48900 ;
+                                                                                   :hasSeatingValue 4 .
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Avalon_2020
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Avalon_2020> rdf:type owl:NamedIndividual ,
+                                                                                       :Cars ;
+                                                                                   :hasEngine :DOHC_V6_35L ;
+                                                                                   :hasCargoSpace 7 ;
+                                                                                   :hasCombinedMPGValue 22 ;
+                                                                                   :hasHightValue 55 ;
+                                                                                   :hasManufacturedYear 2020 ;
+                                                                                   :hasMaxSpeed 150 ;
+                                                                                   :hasPriceValue 35875 ;
+                                                                                   :hasSeatingValue 5 .
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Avalon_2021
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Avalon_2021> rdf:type owl:NamedIndividual ,
+                                                                                       :Cars ;
+                                                                                   :hasEngine :DOHC_V6_35L ;
+                                                                                   :hasCargoSpace 7 ;
+                                                                                   :hasCombinedMPGValue 22 ;
+                                                                                   :hasHightValue 55 ;
+                                                                                   :hasManufacturedYear 2021 ;
+                                                                                   :hasMaxSpeed 150 ;
+                                                                                   :hasPriceValue 36775 ;
+                                                                                   :hasSeatingValue 5 .
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Avalon_Hybrid_2020
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Avalon_Hybrid_2020> rdf:type owl:NamedIndividual ,
+                                                                                       :HybridAndFuelCells ;
+                                                                                   :hasEngine :DOHC_4_25L ;
+                                                                                   :hasMotor :HybridMotor ;
+                                                                                   :hasCargoSpace 7 ;
+                                                                                   :hasCombinedMPGValue 35 ;
+                                                                                   :hasHightValue 55 ;
+                                                                                   :hasManufacturedYear 2020 ;
+                                                                                   :hasMaxSpeed 150 ;
+                                                                                   :hasPriceValue 37875 ;
+                                                                                   :hasSeatingValue 5 .
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Avalon_Hybrid_2021
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Avalon_Hybrid_2021> rdf:type owl:NamedIndividual ,
+                                                                                       :HybridAndFuelCells ;
+                                                                                   :hasEngine :DOHC_4_25L ;
+                                                                                   :hasMotor :HybridMotor ;
+                                                                                   :hasCargoSpace 7 ;
+                                                                                   :hasCombinedMPGValue 35 ;
+                                                                                   :hasHightValue 55 ;
+                                                                                   :hasManufacturedYear 2021 ;
+                                                                                   :hasMaxSpeed 150 ;
+                                                                                   :hasPriceValue 38775 ;
+                                                                                   :hasSeatingValue 5 .
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Camry_2020
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Camry_2020> rdf:type owl:NamedIndividual ,
+                                                                                       :Cars ;
+                                                                                   :hasEngine :DOHC_4_25L ;
+                                                                                   :hasCargoSpace 6 ;
+                                                                                   :hasCombinedMPGValue 29 ;
+                                                                                   :hasHightValue 54 ;
+                                                                                   :hasManufacturedYear 2020 ;
+                                                                                   :hasMaxSpeed 150 ;
+                                                                                   :hasPriceValue 24400 ;
+                                                                                   :hasSeatingValue 5 .
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Camry_2021
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Camry_2021> rdf:type owl:NamedIndividual ,
+                                                                                       :Cars ;
+                                                                                   :hasEngine :DOHC_4_25L ;
+                                                                                   :hasCargoSpace 6 ;
+                                                                                   :hasCombinedMPGValue 29 ;
+                                                                                   :hasHightValue 54 ;
+                                                                                   :hasManufacturedYear 2021 ;
+                                                                                   :hasMaxSpeed 150 ;
+                                                                                   :hasPriceValue 24900 ;
+                                                                                   :hasSeatingValue 5 .
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Camry_Hybrid_2020
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Camry_Hybrid_2020> rdf:type owl:NamedIndividual ,
+                                                                                       :HybridAndFuelCells ;
+                                                                                   :hasEngine :DOHC_4_25L ;
+                                                                                   :hasMotor :HybridMotor ;
+                                                                                   :hasCargoSpace 6 ;
+                                                                                   :hasCombinedMPGValue 35 ;
+                                                                                   :hasHightValue 54 ;
+                                                                                   :hasManufacturedYear 2020 ;
+                                                                                   :hasMaxSpeed 150 ;
+                                                                                   :hasPriceValue 28500 ;
+                                                                                   :hasSeatingValue 5 .
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Camry_Hybrid_2021
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Camry_Hybrid_2021> rdf:type owl:NamedIndividual ,
+                                                                                       :HybridAndFuelCells ;
+                                                                                   :hasEngine :DOHC_4_25L ;
+                                                                                   :hasMotor :HybridMotor ;
+                                                                                   :hasCargoSpace 6 ;
+                                                                                   :hasCombinedMPGValue 36 ;
+                                                                                   :hasHightValue 54 ;
+                                                                                   :hasManufacturedYear 2021 ;
+                                                                                   :hasMaxSpeed 150 ;
+                                                                                   :hasPriceValue 28900 ;
+                                                                                   :hasSeatingValue 5 .
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Corolla_2020
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Corolla_2020> rdf:type owl:NamedIndividual ,
+                                                                                       :Cars ;
+                                                                                   :hasEngine :DOHC_4_2L ;
+                                                                                   :hasCargoSpace 6 ;
+                                                                                   :hasCombinedMPGValue 31 ;
+                                                                                   :hasHightValue 52 ;
+                                                                                   :hasManufacturedYear 2020 ;
+                                                                                   :hasMaxSpeed 140 ;
+                                                                                   :hasPriceValue 19600 ;
+                                                                                   :hasSeatingValue 5 .
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Corolla_2021
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Corolla_2021> rdf:type owl:NamedIndividual ,
+                                                                                       :Cars ;
+                                                                                   :hasEngine :DOHC_4_2L ;
+                                                                                   :hasCargoSpace 6 ;
+                                                                                   :hasCombinedMPGValue 31 ;
+                                                                                   :hasHightValue 52 ;
+                                                                                   :hasManufacturedYear 2021 ;
+                                                                                   :hasMaxSpeed 140 ;
+                                                                                   :hasPriceValue 19900 ;
+                                                                                   :hasSeatingValue 5 .
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Corolla_Hybrid_2020
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Corolla_Hybrid_2020> rdf:type owl:NamedIndividual ,
+                                                                                       :HybridAndFuelCells ;
+                                                                                   :hasEngine :DOHC_4_18L ;
+                                                                                   :hasMotor :HybridMotor ;
+                                                                                   :hasCargoSpace 6 ;
+                                                                                   :hasCombinedMPGValue 51 ;
+                                                                                   :hasHightValue 52 ;
+                                                                                   :hasManufacturedYear 2020 ;
+                                                                                   :hasMaxSpeed 140 ;
+                                                                                   :hasPriceValue 23500 ;
+                                                                                   :hasSeatingValue 5 .
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Corolla_Hybrid_2021
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Corolla_Hybrid_2021> rdf:type owl:NamedIndividual ,
+                                                                                       :HybridAndFuelCells ;
+                                                                                   :hasEngine :DOHC_4_18L ;
+                                                                                   :hasMotor :HybridMotor ;
+                                                                                   :hasCargoSpace 6 ;
+                                                                                   :hasCombinedMPGValue 51 ;
+                                                                                   :hasHightValue 52 ;
+                                                                                   :hasManufacturedYear 2021 ;
+                                                                                   :hasMaxSpeed 140 ;
+                                                                                   :hasPriceValue 23900 ;
+                                                                                   :hasSeatingValue 5 .
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Corolla_Hatchback_2020
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Corolla_Hatchback_2020> rdf:type owl:NamedIndividual ,
+                                                                                       :Cars ;
+                                                                                   :hasEngine :DOHC_4_2L ;
+                                                                                   :hasCargoSpace 6 ;
+                                                                                   :hasCombinedMPGValue 31 ;
+                                                                                   :hasHightValue 52 ;
+                                                                                   :hasManufacturedYear 2020 ;
+                                                                                   :hasMaxSpeed 140 ;
+                                                                                   :hasPriceValue 20200 ;
+                                                                                   :hasSeatingValue 5 .
+
+###  http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Corolla_Hatchback_2021
+<http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#Corolla_Hatchback_2021> rdf:type owl:NamedIndividual ,
+                                                                                       :Cars ;
+                                                                                   :hasEngine :DOHC_4_2L ;
+                                                                                   :hasCargoSpace 6 ;
+                                                                                   :hasCombinedMPGValue 31 ;
+                                                                                   :hasHightValue 52 ;
+                                                                                   :hasManufacturedYear 2021 ;
+                                                                                   :hasMaxSpeed 140 ;
+                                                                                   :hasPriceValue 20900 ;
+                                                                                   :hasSeatingValue 5 .
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :HighPower
+                :LowPower
+                :MediumPower
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :HighSpeed
+                :LowSpeed
+                :MediumSpeed
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( <http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#3Cylinder>
+                <http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#4Cylinder>
+                <http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#6Cylinder>
+                <http://www.semanticweb.org/isuru/ontologies/2020/10/toyota_vehicles#8Cylinder>
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
